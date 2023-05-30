@@ -20,6 +20,7 @@ import android.widget.PopupMenu
 import androidx.appcompat.widget.Toolbar
 import java.util.*
 import android.util.Log
+import android.net.Uri
 
 import javax.crypto.Cipher
 import android.util.Base64
@@ -122,6 +123,11 @@ class DecryptDetailsActivity : AppCompatActivity() {
 
                         runOnUiThread {
                             decryptedTextView.text = String(decryptedMessage)
+                            decryptedTextView.setOnClickListener {
+                                val openLinkIntent =
+                                    Intent(Intent.ACTION_VIEW, Uri.parse(decryptedMessage.decodeToString()))
+                                startActivity(openLinkIntent)
+                            }
                         }
                     }
                 }
